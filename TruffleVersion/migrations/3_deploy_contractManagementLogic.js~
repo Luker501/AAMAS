@@ -1,9 +1,0 @@
-
-var ContractManagementLogic = artifacts.require("ContractManagementLogic");
-var ContractManagementData = artifacts.require("ContractManagementData");
-
-module.exports = function(deployer) {
-    deployer.deploy(ContractManagementLogic);
-	ContractManagementData.deployed()
-    	.then(_instance => console.log(_instance.address));
-};

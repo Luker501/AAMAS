@@ -1,6 +1,0 @@
-
-var VotingData = artifacts.require("./VotingData.sol");
-
-module.exports = function(deployer) {
-    deployer.deploy(VotingData);
-};
