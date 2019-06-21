@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agent 1's - Dashboard</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+ <script src="./node_modules/web3/dist/web3.min.js"></script>
+<script src="./BlockchainVariables.js"></script>
+
+
+  </head>
+
+  <body id="page-top">
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+      <a class="navbar-brand mr-1" href="index">Agent 1's Service</a>
+
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+      </button>
+
+
+<!-- Navbar Search -->
+      <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        
+      </form>
+
+      <!-- Navbar -->
+      <ul class="navbar-nav ml-auto ml-md-0">
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-user-circle fa-fw"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+          </div>
+        </li>
+      </ul>
+
+    </nav>
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="Shareholders">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Investors</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="InitiateEvent">
+            <i class="fas fa-fw fa-plus-square"></i>
+            <span>Initiate Events</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-tasks"></i>
+            <span>Pending Events</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-fw fa-list-ul"></i>
+            <span>Completed Events</span>
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="DataImport">
+            <i class="fas fa-fw fa-download"></i>
+            <span>Data Import</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="VoteResults">
+            <i class="fas fa-fw fa-chart-line"></i>
+            <span>Report</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+</br>
+
+
+          <!-- Icon Cards-->
+</br>
+    
+        <div class="card-header">Data Import</div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+
+
+		<div class="form-row">
+                <div class="col-md-12">
+                  <div class="form-label-group">
+                    <p>To import new investments data (or override existing investments data) into Nominee Service, please upload CSV file using upload section below</p>
+                  </div>
+                </div>
+                </div>
+              
+		<div class="form-row">
+                <div class="col-md-12">
+			<div class="card text-white bg-info mb-3">
+			  <div class="card-body">
+				<h5>What CSV file format is required</h5>
+				<p>Please make sure file has no header row and consists of following columns comma separated:</p>
+				<ul>
+					<li><b>Investor ID</b> (numeric. If 0 is given a new ID will be generated. Otherwise there will be a check to see if the ID and name match a current Investor - if the match fails, this row of data will not be added)</li>
+					<li><b>Investor Name</b> (text)</li>
+					<li><b>Company Name</b> (text)</li>
+					<li><b>Round Name</b> (text, case sensitive. It must exactly match target round name, usually combined of pitch name and pitch start date)</li>
+					<li><b>Number of securities</b> (numeric)</li>
+					<li><b>Type of securities</b> (case insensitive. One of the following: <h6>Ordinary Shares, A Ordinary Shares, B Ordinary Shares, C Ordinary Shares, D Ordinary Shares, E Ordinary Shares, Seed Shares, Preference Shares)</h6></li>
+				</ul>
+		<p>Example:</p>
+		<p>53722,John Smith,Company_A,12/09/2016,5,Preference Shares</br>
+		301699,Jane Doe,Company_A,12/09/2016,10, A Ordinary Shares</br>
+		74093,Sarah Jones,Company_A,12/09/2016,15,Preference Shares</br>
+		157737,Fred Flint,Company_A,12/09/2016,200,B Ordinary Shares</br>
+		6134,James Burns,Company_A,12/09/2016,500,A Ordinary Shares</br>
+		298492,Mark Mutton,Company_A,12/09/2016,1000,Preference Shares</br>
+		298678,Matt Dock,Company_A,12/09/2016,2000,Preference Shares</p>
+			  </div>
+			</div>
+                </div>                
+                </div>
+</br>
+          </form>
+
+        <form action="/FileUpload" method="post" enctype="multipart/form-data">
+
+<div class="form-row">
+                <div class="col-md-2">
+                  <div class="form-label-group">
+                    <p>File to Import:</p>
+                  </div>
+                </div>
+                <div class="col-md-1">
+                  <div class="form-label-group">
+	            <a class="btn btn-primary btn-block" id="butGetFile"><font color ="white">Get File</font></a>
+<input type="file" id="Uploadedfile" name="Uploadedfile" class="form-control" placeholder="Project Data" accept=".csv" style="display: none;" autofocus="autofocus">
+                  </div>
+                </div>
+              </div>
+</br>
+
+<div class="form-row">
+                <div class="col-md-2">
+                  <div class="form-label-group">
+                    <p>File Name:</p>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-label-group">
+	            <input type="text" id="FileUpload" class="form-control" placeholder="File to be uploaded" required="required" autofocus="autofocus" disabled=true>
+                    <label for="FileUpload">File to be uploaded...</label>
+                  </div>
+                </div>
+              </div>
+</br>
+
+<div class="form-row">
+                <div class="col-md-2">
+                  <div class="form-label-group">
+                    <p>Description:</p>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-label-group">
+	            <input type="text" id="Question" class="form-control" placeholder="Please describe your data import" required="required" autofocus="autofocus">
+                    <label for="Question">Please describe your data import...</label>
+                  </div>
+                </div>
+              </div>
+</br>
+
+		<div class="form-row">
+                <div class="col-md-2">
+                  <div class="form-label-group">
+	            <input id="butUpload" type="submit" class="btn btn-primary" value="Upload">
+                  </div>
+                </div>
+              </div>
+</br>
+            </div>
+          </form>
+	
+	</div>	
+	</br>
+	</br>
+
+
+
+        </div>
+
+
+
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Prototype v0.4.0</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<script>
+
+
+$('#butGetFile').on('click', function() {
+    $('#Uploadedfile').trigger('click');
+});
+
+$("#Uploadedfile").change(function(){
+         //submit the form here
+	var fileInput = document.getElementById('Uploadedfile');   
+	var filename = fileInput.files[0].name;
+	console.log('filename: ' + filename);
+	document.getElementById('FileUpload').value = filename; 
+ });
+
+
+</script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Page level plugin JavaScript
+    <script src="vendor/chart.js/Chart.min.js"></script> -->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="js/demo/datatables-demo.js"></script>
+    <!--<script src="js/demo/chart-area-demo.js"></script>-->
+
+  </body>
+
+</html>

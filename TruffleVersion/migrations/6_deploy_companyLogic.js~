@@ -1,0 +1,13 @@
+
+var ContractLogic = artifacts.require("./CompanyLogic.sol");
+var ContractData = artifacts.require("./CompanyData.sol");
+
+module.exports = async function(deployer) {
+	let instance = await ContractData.deployed();
+	console.log("CompanyData address is: " + instance.address); 
+	return deployer.deploy(ContractManagementLogic,instance.address);
+
+	//then we need to allow the contractManagementLogic to be the owner of the data contract.
+
+	
+};

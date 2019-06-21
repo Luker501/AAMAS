@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agent 1's - Dashboard</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<script src="./BlockchainVariables.js"></script>
+
+  </head>
+
+  <body class="bg-dark">
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+
+
+    <div class="container">
+      <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Cast Your Vote:</div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="text" id="inputName" class="form-control" placeholder="Name" required="required" autofocus="autofocus">
+                <label for="inputName">Name</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="number" id="inputInvestorID" class="form-control" placeholder="Investor ID" required="required">
+                <label for="inputInvestorID">Investor ID</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="text" id="inputCompanyName" class="form-control" placeholder="Company Name" required="required" disabled="True">
+                <label for="inputCompanyName">Company Name</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="number" id="inputVoteID" class="form-control" placeholder="Vote ID" required="required" disabled="True">
+                <label for="inputVoteID">Vote ID</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <select class="form-control" id="inputOptionSelections">
+		</select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required">
+                <label for="inputPassword">Password</label>
+              </div>
+            </div>
+            <a class="btn btn-primary btn-block" id="butVote" href="VoteResults">Vote</a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+<script>
+var votingCompanyName = window.localStorage.getItem("votingCompanyName");
+console.log('votingCompanyName ' + votingCompanyName);
+document.getElementById('inputCompanyName').value = votingCompanyName;
+var votingQuestionNum = window.localStorage.getItem("votingQuestionNum");
+console.log('votingQuestionNum ' + votingQuestionNum);
+document.getElementById('inputVoteID').value = votingQuestionNum;
+var votingOptionOne = window.localStorage.getItem("votingOptionOne");
+console.log('votingOptionOne ' + votingOptionOne);
+$('#inputOptionSelections').append('<option value ="1">'+ votingOptionOne +'</option>');
+var votingOptionTwo = window.localStorage.getItem("votingOptionTwo");
+console.log('votingOptionTwo ' + votingOptionTwo);
+$('#inputOptionSelections').append('<option value="2">'+ votingOptionTwo +'</option>');
+</script>
+
+<script>
+
+$("#butVote").click(function(){
+	console.log('The User has attempted to vote!');
+	let Name = $("#inputName").val();
+	let InvestorId = $("#inputInvestorID").val();
+	let CompanyName = $("#inputCompanyName").val();
+	let VoteId = $("#inputVoteID").val();
+	let SelectedVoteText = $("#inputOptionSelections option:selected" ).text();
+	let SelectedVoteID = $("#inputOptionSelections option:selected" ).val();
+	console.log('Name is: ' + Name);
+	console.log('InvestorID is: ' + InvestorId);
+	console.log('CompanyName is: ' + CompanyName);
+	console.log('VoteID is: ' + VoteId);
+	console.log('SelectedVoteText is: ' + SelectedVoteText);
+	console.log('SelectedVoteID is: ' + SelectedVoteID);
+
+	send(Name,InvestorId,CompanyName,VoteId,SelectedVoteText,SelectedVoteID);
+	alert("Your vote has been submitted");
+});
+
+function send(thisName,thisInvestorId,thisCompanyName,thisVoteId,SelectedVoteText,SelectedVoteID){
+$.ajax({
+    url:"UploadVote",
+    data: {'Name':thisName,'InvestorID':thisInvestorId,'CompanyName':thisCompanyName,'VoteID':thisVoteId,'VoteOptionSelectedID':SelectedVoteID,'VoteOptionSelectedText':SelectedVoteText},
+    type: "POST"
+  })
+	
+}
+</script>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  </body>
+
+</html>

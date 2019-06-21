@@ -1,0 +1,6 @@
+
+var ContractManagementData = artifacts.require("./ContractManagementData.sol");
+
+module.exports = function(deployer) {
+    deployer.deploy(ContractManagementData);
+};
